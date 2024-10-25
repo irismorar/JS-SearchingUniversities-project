@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --clr1: #857171;
+  --clr2: #4e4040;
+  --clr3: #615656;
+  --clr4: #ad9c9a;
+}
+
+body {
+  font-size: 10px;
+  font-family: "Poppins", "Josefin Sans", "Raleway";
+  height: 100vh;
+  background-color: var(--clr1);
+  user-select: none;
+}
+
+.main_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title_container {
+  width: 80%;
+  height: 1.15em;
+  font-size: 5rem;
+  font-weight: 600;
+  position: relative;
+  font-family: "Poppins", "Josefin Sans", "Raleway";
+  margin: 6rem 0 3rem 0;
+}
+
+.title_container div {
+  position: absolute;
+  left: 0;
+  text-transform: uppercase;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.upper {
+  top: 0;
+  height: 52.5%;
+  color: var(--clr4);
+  overflow: hidden;
+  z-index: 3;
+  animation: moveUp 2.5s ease-in-out 1;
+  background-color: var(--clr1);
+}
+
+.lower {
+  bottom: 0;
+  height: 100%;
+  background: linear-gradient(180deg, var(--clr1) 52.5%, var(--clr4) 52.5%);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  z-index: 1;
+  animation: moveDown 2.5s ease-in-out 1;
+}
+
+.inside {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-40%);
+  text-align: center;
+  z-index: 2;
+  font-size: 1.1rem;
+  color: var(--clr2);
+}
+
+@keyframes moveUp {
+  0%,
+  100% {
+    top: 0;
+  }
+
+  50%,
+  70% {
+    top: -45px;
+  }
+}
+
+@keyframes moveDown {
+  0%,
+  100% {
+    top: 0;
+  }
+
+  50%,
+  70% {
+    top: 30px;
+  }
+}
+
+.search_input_container {
+  margin-bottom: 3rem;
+}
+
+ input {
+  font-size: 2.5em;
+  padding: .3em 1em;
+  outline: none;
+ }
+
+ button {
+  font-size: 2.5em;
+  padding: .3em 1em;
+  background-color: var(--clr3);
+  color: var(--clr4);
+ }
+
+ button:hover {
+  opacity: .75;
+ }
+
+
+
+@media (max-width: 424px) {
+  .title_container {
+    font-size: 2.5rem;
+  }
+
+  .inside {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .title_container {
+    font-size: 2rem;
+  }
+
+  .inside {
+    font-size: 0.5rem;
+  }
+}
+
+
