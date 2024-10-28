@@ -10,6 +10,7 @@ const tableContainerElement = document.querySelector(".table_container_element")
 buttonElement.disabled = true;
 
 searchInputElement.addEventListener('input', (event) => {
+  tableContainerElement.innerHTML = "";
   if (event.target.value === '') {
     buttonElement.disabled = true;
   } else {
@@ -30,9 +31,8 @@ searchForm.addEventListener('submit', (event) => {
   
   requestUniversitiesData(requestURL).then(universities => {
     tableContainerElement.innerHTML = "";
-    const completeTable = createTable(universities)
+    const completeTable = createTable(universities);
     tableContainerElement.append(completeTable);
-    console.log(universities);
   })
 });
 
@@ -84,20 +84,29 @@ function createTable(universities) {
   tableHeadElement.append(tableRowHeadElement);
   
   
-  let universities_infos_element = universities.map(university => {
+  let universities_infos_elements = universities.map(university => {
     const tableDivisionNameElement = document.createElement("td");
     tableDivisionNameElement.append(`${university.name}`);
     const tableDivisionCountryElement = document.createElement("td");
     tableDivisionCountryElement.append(`${university.country}`);
     const tableDivisionWebPagesElement = document.createElement("td");
-    tableDivisionWebPagesElement.append(`${university.web_pages}`);
+
+    const anchors_web_pages = university.web_pages.map(web_page => {
+      const anchor = document.createElement("a");
+      anchor.href = web_page;
+      anchor.setAttribute("target", "_blank");
+      anchor.append(web_page);
+      return anchor;
+    })
+    tableDivisionWebPagesElement.append(...anchors_web_pages);
     
     const tableRowBodyElement = document.createElement("tr");
     tableRowBodyElement.append(tableDivisionNameElement, tableDivisionCountryElement, tableDivisionWebPagesElement);
+    return tableRowBodyElement;
   })
   
   
-  tableBodyElement.append(...universities_infos_element);
+  tableBodyElement.append(...universities_infos_elements);
   tableElement.append(tableHeadElement, tableBodyElement);
 
   return tableElement;
